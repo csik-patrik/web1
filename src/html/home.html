@@ -69,8 +69,7 @@
 
                         var updateButton = $('<a class="btn btn-warning mr-2">Modify</a>');
 
-                        var deleteButton = $('<a class="btn btn-danger">Delete</a>');
-                                               
+                        var deleteButton = $('<a class="btn btn-danger" onClick="deleteUser(\'' + user.id + '\')">Delete</a>');
 
                         $('#usersBody').append($("<tr>")
                             .append($("<td>").append(user.id))
@@ -80,18 +79,17 @@
                             .append($("<td>").append(user.last_name))
                             .append($("<td>").append(updateButton).append(deleteButton))
                         );
-
-                        
                     });
                 }
             });
 
-            function delteUser(id){
+            function deleteUser(id){
                 $.ajax({
                     url: 'https://reqres.in/api/users/'+id,
                     type: 'DELETE',
                     success: function(result) {
-                        alert("A felhasználó törlése sikeres!")
+                        alert("A felhasználó törlése sikeres!");
+                        location.reload();
                     }
                 });
             }
