@@ -41,6 +41,11 @@
                     <h1 class="display-4 d-flex justify-content-center">Users</h1>
                 </div>
             </div>
+            <div class="row justify-content-left pb-3">
+                <div class="class-lg-6">
+                    <a class="btn bg-success text-white" href=""> Add User</a>
+                </div>
+            </div>
             <table class="table table-hover table-striped">
                 <thead>
                   <tr class="text-center">
@@ -54,11 +59,13 @@
                 </thead>
                 <tbody class="text-center" id="usersBody"></tbody>
               </table>
+              <!--Gombok, ahány page van-->
         </div>
           
         <script>
+            //Kiszervezni metódusba (paraméter page number)
             $.ajax({
-                url: 'https://reqres.in/api/users',
+                url: 'https://reqres.in/api/users?page=1', // ne 1 hanem param
                 method: 'GET',
                 dataType: 'json',
                 
@@ -80,6 +87,9 @@
                             .append($("<td>").append(updateButton).append(deleteButton))
                         );
                     });
+                },
+                error: function(result){
+                    alert(result.status);
                 }
             });
 
@@ -91,6 +101,35 @@
                         alert("A felhasználó törlése sikeres!");
                         location.reload();
                     }
+                });
+            }
+
+            function createUser(adatok){
+                $.ajax({
+                    url: 'https://reqres.in/api/users/',
+                    type: 'POST',
+                    //data:{}
+
+                    success: function(result) {
+                        alert("A felhasználó hozzáadása sikeres!");
+                        //location.reload();
+                        //Kezdőoldal
+                    }
+                });
+            }
+
+            function updateUser(id){
+                $.ajax({
+                    url: 'https://reqres.in/api/users/'+id,
+                    type: 'PUT',
+                    //data:{}
+
+                    success: function(result) {
+                        alert("A felhasználó frissítése sikeres!");
+                        //location.reload();
+                        //Kezdőoldal
+                    }
+                    //hibakezése
                 });
             }
         </script>          
